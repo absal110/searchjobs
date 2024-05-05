@@ -3,7 +3,7 @@ import {Container, Typography} from '@mui/material'
 import { JobList } from './components/JobList';
 
 function App() {
-  return (<JobList></JobList>
+  return (<JobList />
   );
 }
 

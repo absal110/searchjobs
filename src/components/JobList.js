@@ -1,16 +1,18 @@
-import { Box, Container, Paper, Typography,  } from "@mui/material";
+import { Typography } from "@mui/material"
 import { useEffect, useState } from "react"
-import { JobCard } from "./JobCard";
+import { JobCard } from "./JobCard"
 
 export const JobList = () => {
+    const [jobs, setJobs] = useState([])
+    const [page,setPage] = useState(0)
 
-
-    const fetchJobs = () =>{
+    const fetchJobs = () => {
+        console.log("fetch")
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         const body = JSON.stringify({
-        "limit": 20,
+        "limit": 12,
         "offset": page
         });
 
@@ -22,26 +24,23 @@ export const JobList = () => {
 
         fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
         .then((response) => response.json())
-        .then((result) => setjobs((prev) => [...prev, ...result.jdList]))
+        .then((result) => setJobs(prev => [...prev, ...result.jdList]))
         .catch((error) => console.error(error));
     }
 
-    const [jobs,setjobs] = useState([])
-    const [page,setPage] = useState(0)
-    useEffect(()=>{
-        fetchJobs()
-    },[page])
-
-    const infiniteScrolling = () => {
-        if(window.innerHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight-200){
-            // setPage((prev)=>prev +20)
+    const infiniteScroll = () => {
+        if (window.innerHeight + document.documentElement.scrollTop +1 >= document.documentElement.offsetHeight){
+            setPage(prev => prev + 12)
         }
     }
 
-    useEffect(()=>{
-        window.addEventListener("scroll",infiniteScrolling)
-    },[])
+    useEffect(() => {
+        fetchJobs()
+    },[page])
 
+    useEffect(() => {
+        window.addEventListener("scroll",infiniteScroll)
+    },[])
 
 
     return <JobCard jobs = {jobs}/>
