@@ -17,12 +17,12 @@ export const JobCard = ({jobs}) => {
                 </Box>
             </Box>
                 <ExpandCard data = {data.jobDetailsFromCompany}></ExpandCard>
-                {data.minExp ? (<Box>
+                {data.minExp ? (<Box sx={{py:2}}>
                     <Typography>Minimum Experience</Typography>
                     <Typography>{data.minExp}</Typography>
-                </Box>) : (<Box sx={{mt:6}}/>)}
+                </Box>) : (<Box sx={{mt:10}}/>)}
                 <Link href = {data.jdLink}>
-                <Button variant="contained" fullWidth = "true">Easy Apply</Button>
+                <Button variant="contained" fullWidth>Easy Apply</Button>
                 </Link>
             </Box>
         </Paper>
