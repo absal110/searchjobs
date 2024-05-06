@@ -6,6 +6,7 @@ import { useState } from 'react';
 function App() {
   const [query,setQuery] = useState({minExp: '', companyName: '', location: '', role: ''})
 
+  // Function to update query parameters
   const handleQuery = (e) =>{
     const {name, value} = e.target
     setQuery({...query,[name]:value})

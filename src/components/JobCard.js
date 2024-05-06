@@ -2,6 +2,7 @@ import { Box, Button, Container, Link, Paper, Typography,  } from "@mui/material
 import { useState } from "react";
 import { ExpandCard } from "./ExpandCard";
 
+// Component for displaying job cards
 export const JobCard = ({jobs}) => {
     return <Box sx={{pt: 4, display: 'flex', justifyContent: 'space-around', gap : 4, flexWrap: 'wrap'}}>
     {jobs.map((data) => {
