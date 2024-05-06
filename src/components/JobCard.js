@@ -1,9 +1,12 @@
-import { Box, Container, Paper, Typography,  } from "@mui/material";
+import { Box, Button, Container, Link, Paper, Typography,  } from "@mui/material";
+import { useState } from "react";
+import { ExpandCard } from "./ExpandCard";
 
 export const JobCard = ({jobs}) => {
-    return <Box sx={{pt: 4, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', gap : 4, flexWrap: 'wrap'}}>
+    return <Box sx={{pt: 4, display: 'flex', justifyContent: 'space-around', gap : 4, flexWrap: 'wrap'}}>
     {jobs.map((data) => {
-        return <Paper elevation={3} square={false} sx={{br:2}} key={data.jdUid}>
+
+        return <Paper elevation={3} square={false} sx={{borderRadius: 5, width : 250}} key={data.jdUid}>
             <Box sx={{m:3}}>
             <Box sx={{display:"flex"}}>
                 <Box sx={{height:40,width:25, m:1}} component="img" alt="Company Logo" src={data.logoUrl}></Box>
@@ -13,10 +16,14 @@ export const JobCard = ({jobs}) => {
                     <Typography>{data.location}</Typography>
                 </Box>
             </Box>
-            <Box >
-                <Typography>Estimated Salary </Typography>
-                <Typography>{data.jobDetailsFromCompany.substr(0,30)}</Typography>
-            </Box>
+                <ExpandCard data = {data.jobDetailsFromCompany}></ExpandCard>
+                {data.minExp ? (<Box>
+                    <Typography>Minimum Experience</Typography>
+                    <Typography>{data.minExp}</Typography>
+                </Box>) : (<Box sx={{mt:6}}/>)}
+                <Link href = {data.jdLink}>
+                <Button variant="contained" fullWidth = "true">Easy Apply</Button>
+                </Link>
             </Box>
         </Paper>
 
